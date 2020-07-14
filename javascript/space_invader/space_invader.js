@@ -34,29 +34,72 @@ function forme(){
     ctx.stroke()
     
     ctx.restore()
-
+    
 }
 
 
 function image(){
     
+    ctx.save()
+    
     let img = new Image();
-    img.src = "./img/xwing.png";
-    ctx.drawImage(img, 0, 0);
+    img.src = "./img/allship.png";
+    //img.src = "./img/sprite_animation.png";
+    
+    x=0
+    load = () =>{
+        requestAnimationFrame(load)
+        x+=1
+        frameWidth = 1344/8
+        frameHeight = 264
+        column = 0
+        
+        // img.onload = (()=>{
+        //     ctx.drawImage(img, column*frameWidth, 0, frameWidth, frameHeight, x, 50, frameWidth, frameHeight);
+        // })
+
+        //ctx.clearRect(0, 0, canvas.width, canvas.height);
+        repere()
+ 
+        if (x > 300){
+            column = 1
+        } 
+        if (x > 600){
+            column = 2
+        }
+
+        if (x > 100){
+            column = 7
+        }
+        //onsole.log(x)
+
+        if (x === canvas.width){
+            x=0
+        }
+        ctx.fillStyle = "rgba(255,0,0,0.6)"
+        ctx.fillRect(10,10,100,100)
+
+        ctx.beginPath()
+        degres = 100
+        ctx.arc(100,100, 100, 0, degres*Math.PI/180, false)
+        ctx.stroke()
+
+        ctx.fillRect(500,10,100,100)
+        ctx.drawImage(img, column*frameWidth, 0, frameWidth, frameHeight, x, 600, frameWidth, frameHeight);
+    }
+    
+    load()
+    
+
+    ctx.restore()
     
 }
-
-
 
 function protection(){
     ctx.save()
     ctx.fillRect(20,420,150,50)
     ctx.restore()
 }
-
-
-
-
 
 
 function text(){
@@ -83,11 +126,11 @@ function drawShape(ctx, xoff, yoff) {
     ctx.bezierCurveTo(580 + xoff, 70 + yoff, -59 + xoff, 34 + yoff, 302 + xoff, 195 + yoff);
     ctx.stroke();
     ctx.restore()
-  }
+}
 
 function circle (){
     ctx.save()
-
+    
     ctx.lineWidth = 10
     ctx.strokeStyle = "#C40"
     ctx.fillStyle = "rgba(10,255,0,0.7)"
@@ -108,32 +151,32 @@ function repere(){
     ctx.fillRect(0,0,canvas.width, canvas.height);
     ctx.lineWidth=1;
     ctx.strokeStyle='#abdced';
-        
-        //ctx.moveTo(10, 10);
-        for (i=0;i<10000;i+=10){
-            if (i%100 === 0){
-                ctx.lineWidth=3;
-            }else{
-                ctx.lineWidth=1;
-            }
-            ctx.beginPath();
-            ctx.lineTo(0, i);
-            ctx.lineTo(canvas.width, i);
-            ctx.stroke()
+    
+    //ctx.moveTo(10, 10);
+    for (i=0;i<10000;i+=10){
+        if (i%100 === 0){
+            ctx.lineWidth=3;
+        }else{
+            ctx.lineWidth=1;
         }
-        
-        for (i=0;i<10000;i+=10){
-            if (i%100 === 0){
-                ctx.lineWidth=3;
-            }else{
-                ctx.lineWidth=1;
-            }
-            ctx.beginPath();
-            ctx.lineTo(i, 0);
-            ctx.lineTo(i, canvas.height);
-            ctx.stroke()
+        ctx.beginPath();
+        ctx.lineTo(0, i);
+        ctx.lineTo(canvas.width, i);
+        ctx.stroke()
+    }
+    
+    for (i=0;i<10000;i+=10){
+        if (i%100 === 0){
+            ctx.lineWidth=3;
+        }else{
+            ctx.lineWidth=1;
         }
+        ctx.beginPath();
+        ctx.lineTo(i, 0);
+        ctx.lineTo(i, canvas.height);
+        ctx.stroke()
+    }
     
     ctx.restore()
-
+    
 }
